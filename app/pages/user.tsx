@@ -3,7 +3,7 @@ import logout from "app/auth/mutations/logout"
 import updateAnnouncement from "app/auth/mutations/updateAnnouncement"
 import { Announcement } from "app/auth/validations"
 import Form from "app/core/components/Form"
-import LabeledFile from "app/core/components/LabeledFile"
+// import LabeledFile from "app/core/components/LabeledFile"
 import LabeledSelect from "app/core/components/LabeledSelect"
 import LabeledTextArea from "app/core/components/LabeledTextArea"
 import LabeledTextField from "app/core/components/LabeledTextField"
@@ -11,8 +11,9 @@ import RegLogNav from "app/core/components/RegLogNav"
 import { useCurrentUser } from "app/core/hooks/useCurrentUser"
 import useUsersAnnouncement from "app/core/hooks/useUsersAnnouncement"
 import Layout from "app/core/layouts/Layout"
-import { BlitzPage, Link, Routes, useMutation } from "blitz"
+import { BlitzPage, Link, Routes, useMutation, Image } from "blitz"
 import React from "react"
+import ProfilePicture from "../../public/profile_img.webp"
 
 const UserPage: BlitzPage = () => {
   const currentUser = useCurrentUser()
@@ -23,15 +24,7 @@ const UserPage: BlitzPage = () => {
 
   const userAnnouncement = useUsersAnnouncement()
 
-  const [photo, setPhoto] = React.useState<string>("")
-
-  const setProfilePicture = () => {
-    if (!photo) {
-      return ""
-    }
-
-    return photo
-  }
+  // const [photo, setPhoto] = React.useState<string>("")
 
   return (
     <>
@@ -56,7 +49,7 @@ const UserPage: BlitzPage = () => {
               name: userAnnouncement ? userAnnouncement.name : "",
               age: userAnnouncement ? userAnnouncement.age : "",
               phone: userAnnouncement ? userAnnouncement.phone : "",
-              photo: userAnnouncement ? userAnnouncement.photo : "",
+              // photo: userAnnouncement ? userAnnouncement.photo : photo,
               description: userAnnouncement ? userAnnouncement.description : "",
               town: userAnnouncement ? userAnnouncement.town : "",
               gender: userAnnouncement ? userAnnouncement.gender : "",
@@ -64,9 +57,11 @@ const UserPage: BlitzPage = () => {
               userId: currentUser.id,
             }}
             onSubmit={async (values) => {
-              if (userAnnouncement) {
+              if (userAnnouncement !== null) {
+                console.log(values)
                 await updateAnnouncementMutation(values)
               } else {
+                console.log(values)
                 await addAnnouncementMutation(values)
               }
             }}
@@ -76,7 +71,7 @@ const UserPage: BlitzPage = () => {
             <LabeledTextField name="phone" label="Nr. Telefonu" placeholder="Podaj Nr. Telefonu" />
 
             {/* <LabeledTextField name="photo" label="Zdjęcie" placeholder="Podaj Zdjęcie" /> */}
-            <LabeledFile label="Zdjęcie Profilowe" setPhoto={setPhoto} />
+            {/* <LabeledFile label="Zdjęcie Profilowe" setPhoto={setPhoto} /> */}
 
             <LabeledTextField name="town" label="Miasto" placeholder="Podaj Miasto" />
             <LabeledSelect
@@ -93,6 +88,7 @@ const UserPage: BlitzPage = () => {
             />
             <LabeledTextArea name="description" label="Opis" placeholder="Podaj Opis Ogłoszenia" />
           </Form>
+          <Image src={ProfilePicture} alt="profile picture" width="300" height="300" />
         </div>
       ) : (
         <div>Coś poszło nie tak</div>

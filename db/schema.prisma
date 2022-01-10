@@ -31,7 +31,7 @@ model Announcement {
   name        String
   age         String
   phone       String
-  photo       String
+  // photo       String
   description String
 
   town         String
