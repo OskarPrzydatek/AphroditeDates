@@ -1,4 +1,4 @@
-import { useRouter, BlitzPage } from "blitz"
+import { useRouter, BlitzPage, Routes } from "blitz"
 import Layout from "app/core/layouts/Layout"
 import { LoginForm } from "app/auth/components/LoginForm"
 
@@ -9,7 +9,7 @@ const LoginPage: BlitzPage = () => {
     <div>
       <LoginForm
         onSuccess={(_user) => {
-          const next = router.query.next ? decodeURIComponent(router.query.next as string) : "/"
+          const next = router.query.next ? decodeURIComponent(router.query.next as string) : "/user"
           router.push(next)
         }}
       />
@@ -18,6 +18,6 @@ const LoginPage: BlitzPage = () => {
 }
 
 LoginPage.redirectAuthenticatedTo = "/"
-LoginPage.getLayout = (page) => <Layout title="Log In">{page}</Layout>
+LoginPage.getLayout = (page) => <Layout>{page}</Layout>
 
 export default LoginPage

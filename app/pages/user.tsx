@@ -1,0 +1,106 @@
+import addAnnouncement from "app/auth/mutations/addAnnouncement"
+import logout from "app/auth/mutations/logout"
+import updateAnnouncement from "app/auth/mutations/updateAnnouncement"
+import { Announcement } from "app/auth/validations"
+import Form from "app/core/components/Form"
+import LabeledFile from "app/core/components/LabeledFile"
+import LabeledSelect from "app/core/components/LabeledSelect"
+import LabeledTextArea from "app/core/components/LabeledTextArea"
+import LabeledTextField from "app/core/components/LabeledTextField"
+import RegLogNav from "app/core/components/RegLogNav"
+import { useCurrentUser } from "app/core/hooks/useCurrentUser"
+import useUsersAnnouncement from "app/core/hooks/useUsersAnnouncement"
+import Layout from "app/core/layouts/Layout"
+import { BlitzPage, Link, Routes, useMutation } from "blitz"
+import React from "react"
+
+const UserPage: BlitzPage = () => {
+  const currentUser = useCurrentUser()
+  const [logoutMutation] = useMutation(logout)
+
+  const [addAnnouncementMutation] = useMutation(addAnnouncement)
+  const [updateAnnouncementMutation] = useMutation(updateAnnouncement)
+
+  const userAnnouncement = useUsersAnnouncement()
+
+  const [photo, setPhoto] = React.useState<string>("")
+
+  const setProfilePicture = () => {
+    if (!photo) {
+      return ""
+    }
+
+    return photo
+  }
+
+  return (
+    <>
+      {currentUser ? (
+        <div>
+          <div className="user-page-bar">
+            {currentUser && <span>{currentUser.email}</span>}
+            <Link href={Routes.AnnouncementsPage()}>
+              <a>Ogłoszenia</a>
+            </Link>
+            <RegLogNav
+              currentUser={currentUser}
+              logoutMutation={logoutMutation}
+              isUserPage={true}
+            />
+          </div>
+
+          <Form
+            submitText={userAnnouncement ? "Aktualizuj Ogłoszenie" : "Dodaj Ogłoszenie"}
+            schema={Announcement}
+            initialValues={{
+              name: userAnnouncement ? userAnnouncement.name : "",
+              age: userAnnouncement ? userAnnouncement.age : "",
+              phone: userAnnouncement ? userAnnouncement.phone : "",
+              photo: userAnnouncement ? userAnnouncement.photo : "",
+              description: userAnnouncement ? userAnnouncement.description : "",
+              town: userAnnouncement ? userAnnouncement.town : "",
+              gender: userAnnouncement ? userAnnouncement.gender : "",
+              interestedIn: userAnnouncement ? userAnnouncement.interestedIn : "",
+              userId: currentUser.id,
+            }}
+            onSubmit={async (values) => {
+              if (userAnnouncement) {
+                await updateAnnouncementMutation(values)
+              } else {
+                await addAnnouncementMutation(values)
+              }
+            }}
+          >
+            <LabeledTextField name="name" label="Imię" placeholder="Podaj Imię" />
+            <LabeledTextField name="age" label="Wiek" placeholder="Podaj Wiek" type="number" />
+            <LabeledTextField name="phone" label="Nr. Telefonu" placeholder="Podaj Nr. Telefonu" />
+
+            {/* <LabeledTextField name="photo" label="Zdjęcie" placeholder="Podaj Zdjęcie" /> */}
+            <LabeledFile label="Zdjęcie Profilowe" setPhoto={setPhoto} />
+
+            <LabeledTextField name="town" label="Miasto" placeholder="Podaj Miasto" />
+            <LabeledSelect
+              name="gender"
+              label="Płeć"
+              placeholder="Podaj Swoją Płeć"
+              options={["Mężczyzna", "Kobieta"]}
+            />
+            <LabeledSelect
+              name="interestedIn"
+              label="Interesują Mnie"
+              placeholder="Podaj Płeć Przeciwną"
+              options={["Mężczyźni", "Kobiety"]}
+            />
+            <LabeledTextArea name="description" label="Opis" placeholder="Podaj Opis Ogłoszenia" />
+          </Form>
+        </div>
+      ) : (
+        <div>Coś poszło nie tak</div>
+      )}
+    </>
+  )
+}
+
+UserPage.getLayout = (page) => <Layout>{page}</Layout>
+
+export default UserPage

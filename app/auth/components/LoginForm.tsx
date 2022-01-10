@@ -13,10 +13,10 @@ export const LoginForm = (props: LoginFormProps) => {
 
   return (
     <div>
-      <h1>Login</h1>
+      <h1>Zaloguj Się</h1>
 
       <Form
-        submitText="Login"
+        submitText="Zaloguj"
         schema={Login}
         initialValues={{ email: "", password: "" }}
         onSubmit={async (values) => {
@@ -28,24 +28,23 @@ export const LoginForm = (props: LoginFormProps) => {
               return { [FORM_ERROR]: "Sorry, those credentials are invalid" }
             } else {
               return {
-                [FORM_ERROR]:
-                  "Sorry, we had an unexpected error. Please try again. - " + error.toString(),
+                [FORM_ERROR]: "Coś poszło nie tak... Spróbuj ponownie. - " + error.toString(),
               }
             }
           }
         }}
       >
         <LabeledTextField name="email" label="Email" placeholder="Email" />
-        <LabeledTextField name="password" label="Password" placeholder="Password" type="password" />
+        <LabeledTextField name="password" label="Hasło" placeholder="Hasło" type="password" />
         <div>
           <Link href={Routes.ForgotPasswordPage()}>
-            <a>Forgot your password?</a>
+            <a>Zapomniałeś Hasła?</a>
           </Link>
         </div>
       </Form>
 
       <div style={{ marginTop: "1rem" }}>
-        Or <Link href={Routes.SignupPage()}>Sign Up</Link>
+        Lub <Link href={Routes.SignupPage()}>Zarejestruj Się</Link>
       </div>
     </div>
   )

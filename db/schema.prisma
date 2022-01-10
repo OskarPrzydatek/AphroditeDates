@@ -21,8 +21,25 @@ model User {
   hashedPassword String?
   role           String   @default("USER")
 
-  tokens   Token[]
-  sessions Session[]
+  tokens       Token[]
+  sessions     Session[]
+  announcement Announcement?
+}
+
+model Announcement {
+  id          Int    @id @default(autoincrement())
+  name        String
+  age         String
+  phone       String
+  photo       String
+  description String
+
+  town         String
+  gender       String
+  interestedIn String
+
+  user   User @relation(fields: [userId], references: [id])
+  userId Int  @unique
 }
 
 model Session {

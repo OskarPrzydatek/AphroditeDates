@@ -40,3 +40,15 @@ export const ChangePassword = z.object({
   currentPassword: z.string(),
   newPassword: password,
 })
+
+export const Announcement = z.object({
+  name: z.string().nonempty({ message: "Pole Wymagane" }),
+  age: z.string().nonempty({ message: "Pole wymagane" }),
+  phone: z.string().nonempty({ message: "Pole wymagane" }),
+  photo: z.string().nonempty({ message: "Pole wymagane" }),
+  description: z.string().nonempty({ message: "Pole wymagane" }),
+  town: z.string().nonempty({ message: "Pole wymagane" }),
+  gender: z.string().nonempty({ message: "Pole wymagane" }),
+  interestedIn: z.string().nonempty({ message: "Pole wymagane" }),
+  userId: z.number(),
+})

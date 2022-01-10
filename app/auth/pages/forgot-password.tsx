@@ -10,19 +10,19 @@ const ForgotPasswordPage: BlitzPage = () => {
 
   return (
     <div>
-      <h1>Forgot your password?</h1>
+      <h1>Zapomniałeś Hasła?</h1>
 
       {isSuccess ? (
         <div>
-          <h2>Request Submitted</h2>
+          <h2>Wniosek złożony</h2>
           <p>
-            If your email is in our system, you will receive instructions to reset your password
-            shortly.
+            Jeśli Twój e-mail jest w naszym systemie, otrzymasz instrukcje dotyczące resetowania
+            hasła.
           </p>
         </div>
       ) : (
         <Form
-          submitText="Send Reset Password Instructions"
+          submitText="Zmień Hasło"
           schema={ForgotPassword}
           initialValues={{ email: "" }}
           onSubmit={async (values) => {
@@ -30,7 +30,7 @@ const ForgotPasswordPage: BlitzPage = () => {
               await forgotPasswordMutation(values)
             } catch (error: any) {
               return {
-                [FORM_ERROR]: "Sorry, we had an unexpected error. Please try again.",
+                [FORM_ERROR]: "Coś poszło nie tak... Spróbuj ponownie.",
               }
             }
           }}
@@ -43,6 +43,6 @@ const ForgotPasswordPage: BlitzPage = () => {
 }
 
 ForgotPasswordPage.redirectAuthenticatedTo = "/"
-ForgotPasswordPage.getLayout = (page) => <Layout title="Forgot Your Password?">{page}</Layout>
+ForgotPasswordPage.getLayout = (page) => <Layout>{page}</Layout>
 
 export default ForgotPasswordPage
