@@ -11,7 +11,11 @@ import RegLogNav from "app/core/components/RegLogNav"
 import { useCurrentUser } from "app/core/hooks/useCurrentUser"
 import useUsersAnnouncement from "app/core/hooks/useUsersAnnouncement"
 import Layout from "app/core/layouts/Layout"
-import { BlitzPage, Link, Routes, useMutation, Image } from "blitz"
+import { Age } from "app/static/Age"
+import { Gender } from "app/static/Gender"
+import { InterestedIn } from "app/static/InterestedIn"
+import { Towns } from "app/static/Towns"
+import { BlitzPage, useMutation, Image } from "blitz"
 import React from "react"
 import ProfilePicture from "../../public/profile_img.webp"
 
@@ -32,9 +36,6 @@ const UserPage: BlitzPage = () => {
         <div>
           <div className="user-page-bar">
             {currentUser && <span>{currentUser.email}</span>}
-            <Link href={Routes.AnnouncementsPage()}>
-              <a>Ogłoszenia</a>
-            </Link>
             <RegLogNav
               currentUser={currentUser}
               logoutMutation={logoutMutation}
@@ -67,24 +68,36 @@ const UserPage: BlitzPage = () => {
             }}
           >
             <LabeledTextField name="name" label="Imię" placeholder="Podaj Imię" />
-            <LabeledTextField name="age" label="Wiek" placeholder="Podaj Wiek" type="number" />
+            {/* <LabeledTextField name="age" label="Wiek" placeholder="Podaj Wiek" type="number" /> */}
+            <LabeledSelect
+              name="age"
+              label="Wiek"
+              placeholder="Podaj Swój Przedział Wiekowy"
+              options={Age}
+            />
             <LabeledTextField name="phone" label="Nr. Telefonu" placeholder="Podaj Nr. Telefonu" />
 
             {/* <LabeledTextField name="photo" label="Zdjęcie" placeholder="Podaj Zdjęcie" /> */}
             {/* <LabeledFile label="Zdjęcie Profilowe" setPhoto={setPhoto} /> */}
 
-            <LabeledTextField name="town" label="Miasto" placeholder="Podaj Miasto" />
+            {/* <LabeledTextField name="town" label="Miasto" placeholder="Podaj Miasto" /> */}
+            <LabeledSelect
+              name="town"
+              label="Miasto"
+              placeholder="Wybierz Miasto"
+              options={Towns}
+            />
             <LabeledSelect
               name="gender"
               label="Płeć"
               placeholder="Podaj Swoją Płeć"
-              options={["Mężczyzna", "Kobieta"]}
+              options={Gender}
             />
             <LabeledSelect
               name="interestedIn"
               label="Interesują Mnie"
               placeholder="Podaj Płeć Przeciwną"
-              options={["Mężczyźni", "Kobiety"]}
+              options={InterestedIn}
             />
             <LabeledTextArea name="description" label="Opis" placeholder="Podaj Opis Ogłoszenia" />
           </Form>

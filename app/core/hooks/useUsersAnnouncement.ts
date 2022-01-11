@@ -1,4 +1,4 @@
-import getUserAnnoucement from "app/users/queries/getUserAnnoucement"
+import getUserAnnoucement from "app/announcements/queries/getUserAnnoucement"
 import { useQuery } from "blitz"
 
 export default function useUsersAnnouncement() {
