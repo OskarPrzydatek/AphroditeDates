@@ -1,3 +1,4 @@
+import { SearchFilters } from "app/auth/validations"
 import { Age } from "app/static/Age"
 import { Gender } from "app/static/Gender"
 import { InterestedIn } from "app/static/InterestedIn"
@@ -23,6 +24,7 @@ export default function Filters() {
           interestedIn: userAnnouncement ? userAnnouncement.interestedIn : "",
           age: userAnnouncement ? userAnnouncement.age : "",
         }}
+        schema={SearchFilters}
         onSubmit={async (values) => {
           console.log(values)
           await router.push({ pathname: "/announcements", query: values })

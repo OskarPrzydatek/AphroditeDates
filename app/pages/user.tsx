@@ -1,6 +1,5 @@
-import addAnnouncement from "app/auth/mutations/addAnnouncement"
+import addAnnouncement from "app/core/mutations/addAnnouncement"
 import logout from "app/auth/mutations/logout"
-import updateAnnouncement from "app/auth/mutations/updateAnnouncement"
 import { Announcement } from "app/auth/validations"
 import Form from "app/core/components/Form"
 // import LabeledFile from "app/core/components/LabeledFile"
@@ -18,6 +17,7 @@ import { Towns } from "app/static/Towns"
 import { BlitzPage, useMutation, Image } from "blitz"
 import React from "react"
 import ProfilePicture from "../../public/profile_img.webp"
+import updateAnnouncement from "app/core/mutations/updateAnnouncement"
 
 const UserPage: BlitzPage = () => {
   const currentUser = useCurrentUser()

@@ -1,6 +1,6 @@
 import { resolver } from "blitz"
 import db from "db"
-import { Announcement } from "../validations"
+import { Announcement } from "../../auth/validations"
 
 export default resolver.pipe(
   resolver.zod(Announcement),

@@ -32,7 +32,7 @@ export const ResetPassword = z
     token: z.string(),
   })
   .refine((data) => data.password === data.passwordConfirmation, {
-    message: "Passwords don't match",
+    message: "Hasło Nieprawidłowe",
     path: ["passwordConfirmation"], // set the path of the error
   })
 
@@ -51,4 +51,11 @@ export const Announcement = z.object({
   gender: z.string().nonempty({ message: "Pole wymagane" }),
   interestedIn: z.string().nonempty({ message: "Pole wymagane" }),
   userId: z.number(),
+})
+
+export const SearchFilters = z.object({
+  town: z.string().nonempty({ message: "Pole wymagane" }),
+  gender: z.string().nonempty({ message: "Pole wymagane" }),
+  interestedIn: z.string().nonempty({ message: "Pole wymagane" }),
+  age: z.string().nonempty({ message: "Pole wymagane" }),
 })
