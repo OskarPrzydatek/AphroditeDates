@@ -7,14 +7,15 @@ import RegLogNav from "app/core/components/RegLogNav"
 import useCheckAnnouncementsRouterQuery from "app/core/hooks/useCheckAnnouncementsRouterQuery"
 import { useCurrentUser } from "app/core/hooks/useCurrentUser"
 import Layout from "app/core/layouts/Layout"
+import { theme } from "app/style/theme"
 import { BlitzPage, useMutation, usePaginatedQuery, useRouter } from "blitz"
 import React from "react"
-
-const ITEMS_PER_PAGE = 1
 
 const AnnouncementsPage: BlitzPage = () => {
   const router = useRouter()
   const page = Number(router.query.page) || 0
+
+  const ITEMS_PER_PAGE = 3
 
   const [{ announcements, hasMore, count }] = usePaginatedQuery(getPaginatedAnnouncements, {
     town: router.query.town,
@@ -57,7 +58,7 @@ const AnnouncementsPage: BlitzPage = () => {
         <>
           {announcements && announcements.length > 0 ? (
             <>
-              <header>
+              <header className="announcement-header">
                 <h2>Ogłoszenia: {count}</h2>
                 <RegLogNav
                   currentUser={currentUser}
@@ -84,7 +85,6 @@ const AnnouncementsPage: BlitzPage = () => {
                     }
                     name={name}
                     age={age}
-                    town={town}
                   />
                 ))}
               </ul>
@@ -94,17 +94,58 @@ const AnnouncementsPage: BlitzPage = () => {
                 page={page}
                 hasMore={hasMore}
                 count={count}
+                itemsPerPage={ITEMS_PER_PAGE}
               />
             </>
           ) : (
-            <article>
-              <h2>Brak Wyników</h2>
-            </article>
+            <h2 className="no-results">Brak Wyników</h2>
           )}
         </>
       ) : (
         <Filters />
       )}
+
+      <style global jsx>{`
+        .announcement-header {
+          display: flex;
+          flex-direction: column;
+        }
+
+        .announcement-header h2 {
+          text-align: center;
+        }
+
+        ul {
+          margin-top: 10% !important;
+          padding: 2%;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+        }
+
+        .no-results {
+          text-align: center;
+        }
+
+        @media (min-width: ${theme.breakpoints.s}) {
+          .announcement-header {
+            flex-direction: row;
+          }
+
+          .announcement-header h2 {
+            width: 50%;
+            margin: 0;
+          }
+        }
+
+        @media screen and (min-width: ${theme.breakpoints.xxl}) {
+          ul {
+            flex-direction: row;
+            justify-content: space-around;
+          }
+        }
+      `}</style>
     </article>
   )
 }

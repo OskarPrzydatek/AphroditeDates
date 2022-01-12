@@ -15,6 +15,11 @@ export default function Header() {
         .page-logo {
           font-size: ${theme.fontSize.l};
           text-align: center;
+          width: 100%;
+        }
+
+        a {
+          width: 100%;
         }
 
         @media screen and (min-width: ${theme.breakpoints.xs}) {
