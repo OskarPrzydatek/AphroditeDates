@@ -1,10 +1,11 @@
 import { Head, BlitzLayout, Link, Routes } from "blitz"
 import { Suspense } from "react"
 import Footer from "../components/Footer"
+import Loading from "../components/Loading"
 
 const Layout: BlitzLayout<{}> = ({ children }) => {
   return (
-    <Suspense fallback="...">
+    <Suspense fallback={<Loading />}>
       <Head>
         <title>Afrodyta</title>
         <link rel="icon" href="/favicon.ico" />

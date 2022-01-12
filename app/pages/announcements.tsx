@@ -1,4 +1,5 @@
 import getPaginatedAnnouncements from "app/announcements/queries/getPaginatedAnnouncements"
+import AnnouncementCard from "app/core/components/AnnouncementCard"
 import Filters from "app/core/components/Filters"
 import Pagination from "app/core/components/Pagination"
 import useCheckAnnouncementsRouterQuery from "app/core/hooks/useCheckAnnouncementsRouterQuery"
@@ -48,28 +49,44 @@ const AnnouncementsPage: BlitzPage = () => {
     <article>
       {checkRouter ? (
         <>
-          <h2>Ogłoszenia: {count}</h2>
-          <ul>
-            {announcements &&
-              announcements.map(({ id, name, age, town }) => (
-                <li key={id}>
-                  <button onClick={async () => await router.push(`/announcement/${id}`)}>
-                    <div>
-                      <p>{name}</p>
-                      <p>{age}</p>
-                    </div>
-                    <p>{town}</p>
-                  </button>
-                </li>
-              ))}
-          </ul>
-          <Pagination
-            goToPreviousPage={goToPreviousPage}
-            goToNextPage={goToNextPage}
-            page={page}
-            hasMore={hasMore}
-            count={count}
-          />
+          {announcements && announcements.length > 0 ? (
+            <>
+              <h2>Ogłoszenia: {count}</h2>
+              <ul>
+                {announcements.map(({ id, name, age, town }) => (
+                  <AnnouncementCard
+                    key={id}
+                    onClick={async () =>
+                      await router.push({
+                        pathname: `/announcement/${id}`,
+                        query: {
+                          town: router.query.town,
+                          gender: router.query.gender,
+                          interestedIn: router.query.interestedIn,
+                          age: router.query.age,
+                          page: page,
+                        },
+                      })
+                    }
+                    name={name}
+                    age={age}
+                    town={town}
+                  />
+                ))}
+              </ul>
+              <Pagination
+                goToPreviousPage={goToPreviousPage}
+                goToNextPage={goToNextPage}
+                page={page}
+                hasMore={hasMore}
+                count={count}
+              />
+            </>
+          ) : (
+            <article>
+              <h2>Brak Wyników</h2>
+            </article>
+          )}
         </>
       ) : (
         <Filters />

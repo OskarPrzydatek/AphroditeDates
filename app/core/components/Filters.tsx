@@ -26,7 +26,6 @@ export default function Filters() {
         }}
         schema={SearchFilters}
         onSubmit={async (values) => {
-          console.log(values)
           await router.push({ pathname: "/announcements", query: values })
         }}
       >
