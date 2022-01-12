@@ -1,4 +1,4 @@
-import { AuthenticationError, Link, useMutation, Routes, PromiseReturnType, useRouter } from "blitz"
+import { AuthenticationError, useMutation, Routes, PromiseReturnType, useRouter } from "blitz"
 import { LabeledTextField } from "app/core/components/LabeledTextField"
 import { Form, FORM_ERROR } from "app/core/components/Form"
 import login from "app/auth/mutations/login"
@@ -38,11 +38,6 @@ export const LoginForm = (props: LoginFormProps) => {
       >
         <LabeledTextField name="email" label="Email" placeholder="Email" />
         <LabeledTextField name="password" label="Hasło" placeholder="Hasło" type="password" />
-        <div>
-          <Link href={Routes.ForgotPasswordPage()}>
-            <a>Zapomniałeś Hasła?</a>
-          </Link>
-        </div>
       </Form>
 
       <div className="not-have-account">

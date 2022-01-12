@@ -8,6 +8,12 @@ export default function TermsPoint({ header, paragraph }: TermsPointProps) {
     <article>
       <h2>{header}</h2>
       <p>{paragraph}</p>
+
+      <style jsx>{`
+        p {
+          text-align: justify;
+        }
+      `}</style>
     </article>
   )
 }

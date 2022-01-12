@@ -22,6 +22,7 @@ export default function Button({ onClick, label, disabled, type }: ButtonProps) 
           font-size: ${theme.fontSize.l};
           text-decoration: underline;
           text-decoration-color: ${theme.color.red};
+          cursor: pointer;
         }
 
         @media screen and (min-width: ${theme.breakpoints.s}) {
