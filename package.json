@@ -1,7 +1,6 @@
 {
   "name": "aphrodite",
   "version": "1.0.0",
-  "homepage": "https://afrodyta.pl",
   "scripts": {
     "dev": "blitz dev",
     "build": "blitz build",
@@ -11,9 +10,7 @@
     "lint": "eslint --ignore-path .gitignore --ext .js,.ts,.tsx .",
     "test": "jest",
     "test:watch": "jest --watch",
-    "prepare": "husky install",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "prepare": "husky install"
   },
   "prisma": {
     "schema": "db/schema.prisma"
@@ -31,7 +28,6 @@
     "@hookform/resolvers": "2.8.5",
     "@prisma/client": "3.7.0",
     "blitz": "0.45.0",
-    "gh-pages": "3.2.3",
     "react": "18.0.0-beta-149b420f6-20211119",
     "react-dom": "18.0.0-alpha-5ca4b0433-20211020",
     "react-hook-form": "7.22.5",
