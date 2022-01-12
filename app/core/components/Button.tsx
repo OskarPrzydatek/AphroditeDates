@@ -6,9 +6,10 @@ type ButtonProps = {
   type?: any
   label: string
   disabled?: any
+  removeMargin?: boolean
 }
 
-export default function Button({ onClick, label, disabled, type }: ButtonProps) {
+export default function Button({ onClick, label, disabled, type, removeMargin }: ButtonProps) {
   return (
     <button type={type} onClick={onClick} disabled={disabled}>
       {label}
@@ -27,7 +28,7 @@ export default function Button({ onClick, label, disabled, type }: ButtonProps) 
 
         @media screen and (min-width: ${theme.breakpoints.s}) {
           button {
-            margin-right: 1rem;
+            margin-right: ${removeMargin ? "0" : "1rem"};
           }
 
           button:last-child {
