@@ -63,6 +63,7 @@ const AnnouncementsPage: BlitzPage = () => {
                   currentUser={currentUser}
                   logoutMutation={logoutMutation}
                   isAnnouncementsPage={true}
+                  toLeft={true}
                 />
               </header>
               <ul>

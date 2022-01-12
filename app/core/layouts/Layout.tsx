@@ -35,6 +35,14 @@ const Layout: BlitzLayout<{}> = ({ children }) => {
           box-sizing: border-box;
         }
 
+        *:focus {
+          outline: none;
+        }
+
+        *:focus-visible {
+          outline: none;
+        }
+
         ul {
           list-style-type: none;
           padding: 0;

@@ -2,6 +2,8 @@ import { useState, ReactNode, PropsWithoutRef } from "react"
 import { FormProvider, useForm, UseFormProps } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
+import Button from "./Button"
+import { theme } from "app/style/theme"
 
 export interface FormProps<S extends z.ZodType<any, any>>
   extends Omit<PropsWithoutRef<JSX.IntrinsicElements["form"]>, "onSubmit"> {
@@ -65,14 +67,31 @@ export function Form<S extends z.ZodType<any, any>>({
         )}
 
         {submitText && (
-          <button type="submit" disabled={ctx.formState.isSubmitting}>
-            {submitText}
-          </button>
+          <Button type="submit" label={submitText} disabled={ctx.formState.isSubmitting} />
         )}
 
         <style global jsx>{`
+          .form {
+            width: 100%;
+            padding: 0 10%;
+            display: flex;
+            flex-direction: column;
+          }
+
           .form > * + * {
             margin-top: 1rem;
+          }
+
+          @media screen and (min-width: ${theme.breakpoints.l}) {
+            .form {
+              padding: 0 20%;
+            }
+          }
+
+          @media screen and (min-width: ${theme.breakpoints.xl}) {
+            .form {
+              padding: 0 30%;
+            }
           }
         `}</style>
       </form>

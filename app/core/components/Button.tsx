@@ -1,9 +1,16 @@
 import { theme } from "app/style/theme"
 import React from "react"
 
-export default function Button({ onClick, label }) {
+type ButtonProps = {
+  onClick?: () => any
+  type?: any
+  label: string
+  disabled?: any
+}
+
+export default function Button({ onClick, label, disabled, type }: ButtonProps) {
   return (
-    <button onClick={onClick}>
+    <button type={type} onClick={onClick} disabled={disabled}>
       {label}
 
       <style jsx>{`

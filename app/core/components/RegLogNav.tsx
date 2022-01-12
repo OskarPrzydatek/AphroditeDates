@@ -8,6 +8,7 @@ type UserPageProps = {
   logoutMutation?: any
   isUserPage?: boolean
   isAnnouncementsPage?: boolean
+  toLeft?: boolean
 }
 
 export default function RegLogNav({
@@ -15,6 +16,7 @@ export default function RegLogNav({
   logoutMutation,
   isUserPage,
   isAnnouncementsPage,
+  toLeft,
 }: UserPageProps) {
   const router = useRouter()
 
@@ -71,8 +73,8 @@ export default function RegLogNav({
 
         .logged-user-nav {
           display: flex;
-          justify-content: center;
           flex-direction: column;
+          justify-content: ${toLeft ? "flex-end" : "center"};
         }
 
         .logged-user-nav > * {

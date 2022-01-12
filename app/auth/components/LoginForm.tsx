@@ -1,8 +1,9 @@
-import { AuthenticationError, Link, useMutation, Routes, PromiseReturnType } from "blitz"
+import { AuthenticationError, Link, useMutation, Routes, PromiseReturnType, useRouter } from "blitz"
 import { LabeledTextField } from "app/core/components/LabeledTextField"
 import { Form, FORM_ERROR } from "app/core/components/Form"
 import login from "app/auth/mutations/login"
 import { Login } from "app/auth/validations"
+import Button from "app/core/components/Button"
 
 type LoginFormProps = {
   onSuccess?: (user: PromiseReturnType<typeof login>) => void
@@ -10,6 +11,7 @@ type LoginFormProps = {
 
 export const LoginForm = (props: LoginFormProps) => {
   const [loginMutation] = useMutation(login)
+  const router = useRouter()
 
   return (
     <div>
@@ -43,9 +45,24 @@ export const LoginForm = (props: LoginFormProps) => {
         </div>
       </Form>
 
-      <div style={{ marginTop: "1rem" }}>
-        Lub <Link href={Routes.SignupPage()}>Zarejestruj Się</Link>
+      <div className="not-have-account">
+        Nie masz jeszcze konta?&nbsp;&nbsp;
+        <Button
+          label="Zarejestruj Się"
+          onClick={async () => await router.push(Routes.SignupPage())}
+        />
       </div>
+
+      <style global jsx>{`
+        h1 {
+          text-align: center;
+        }
+
+        .not-have-account {
+          margin-top: 1rem;
+          text-align: center;
+        }
+      `}</style>
     </div>
   )
 }

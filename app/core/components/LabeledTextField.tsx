@@ -1,3 +1,4 @@
+import { theme } from "app/style/theme"
 import { forwardRef, PropsWithoutRef, ComponentPropsWithoutRef } from "react"
 import { useFormContext } from "react-hook-form"
 
@@ -30,7 +31,7 @@ export const LabeledTextField = forwardRef<HTMLInputElement, LabeledTextFieldPro
         </label>
 
         {error && (
-          <div role="alert" style={{ color: "red" }}>
+          <div role="alert" style={{ color: theme.color.red }}>
             {error}
           </div>
         )}
@@ -41,14 +42,22 @@ export const LabeledTextField = forwardRef<HTMLInputElement, LabeledTextFieldPro
             flex-direction: column;
             align-items: start;
             font-size: 1rem;
+            width: 100%;
           }
+
           input {
             font-size: 1rem;
             padding: 0.25rem 0.5rem;
-            border-radius: 3px;
-            border: 1px solid purple;
             appearance: none;
             margin-top: 0.5rem;
+            background: inherit;
+            border: none;
+            border-bottom: 2px solid ${theme.color.red};
+            width: 100%;
+          }
+
+          input::placeholder {
+            font-family: ${theme.fontFamily};
           }
         `}</style>
       </div>

@@ -40,6 +40,7 @@ const UserPage: BlitzPage = () => {
               currentUser={currentUser}
               logoutMutation={logoutMutation}
               isUserPage={true}
+              toLeft={true}
             />
           </div>
 
