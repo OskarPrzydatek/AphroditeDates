@@ -1,3 +1,4 @@
+import { theme } from "app/style/theme"
 import React from "react"
 import { useFormContext } from "react-hook-form"
 
@@ -11,7 +12,7 @@ export default function LabeledTextArea({ name, label, placeholder }) {
     : errors[name]?.message || errors[name]
 
   return (
-    <div>
+    <div className="labeled-textarea">
       <label>
         {label}
         <textarea placeholder={placeholder} {...register(name)} disabled={isSubmitting}></textarea>
@@ -23,7 +24,27 @@ export default function LabeledTextArea({ name, label, placeholder }) {
         </div>
       )}
 
-      <style jsx>{``}</style>
+      <style jsx>{`
+        .labeled-textarea {
+          width: 100%;
+        }
+
+        label {
+          display: flex;
+          flex-direction: column;
+          width: 100%;
+        }
+
+        textarea {
+          width: 100%;
+          min-height: 200px;
+          resize: none;
+          background: inherit;
+          border: none;
+          border: 2px solid ${theme.color.red};
+          font-family: ${theme.fontFamily};
+        }
+      `}</style>
     </div>
   )
 }

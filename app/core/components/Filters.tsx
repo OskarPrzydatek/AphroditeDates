@@ -18,6 +18,7 @@ export default function Filters() {
       <h1>Filtry</h1>
       <Form
         submitText="Szukaj"
+        formPadding={true}
         initialValues={{
           town: userAnnouncement ? userAnnouncement.town : "",
           gender: userAnnouncement ? userAnnouncement.gender : "",
@@ -44,6 +45,12 @@ export default function Filters() {
           options={Age}
         />
       </Form>
+
+      <style jsx>{`
+        h1 {
+          text-align: center;
+        }
+      `}</style>
     </div>
   )
 }

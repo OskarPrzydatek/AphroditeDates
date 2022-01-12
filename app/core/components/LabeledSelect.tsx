@@ -1,3 +1,4 @@
+import { theme } from "app/style/theme"
 import { useFormContext } from "react-hook-form"
 
 export default function LabeledSelect({ name, label, placeholder, options }) {
@@ -10,7 +11,7 @@ export default function LabeledSelect({ name, label, placeholder, options }) {
     : errors[name]?.message || errors[name]
 
   return (
-    <div>
+    <div className="labeled-select">
       <label>
         {label}
         <select {...register(name)} disabled={isSubmitting}>
@@ -24,12 +25,33 @@ export default function LabeledSelect({ name, label, placeholder, options }) {
       </label>
 
       {error && (
-        <div role="alert" style={{ color: "red" }}>
+        <div role="alert" style={{ color: theme.color.red }}>
           {error}
         </div>
       )}
 
-      <style jsx>{``}</style>
+      <style jsx>{`
+        .labeled-select {
+          width: 100%;
+        }
+
+        label {
+          display: flex;
+          flex-direction: column;
+          width: 100%;
+        }
+
+        select {
+          background: inherit;
+          border: none;
+          border-bottom: 2px solid ${theme.color.red};
+          font-family: ${theme.fontFamily};
+        }
+
+        select option {
+          background: ${theme.color.white};
+        }
+      `}</style>
     </div>
   )
 }

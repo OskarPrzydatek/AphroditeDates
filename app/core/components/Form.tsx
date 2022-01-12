@@ -14,6 +14,7 @@ export interface FormProps<S extends z.ZodType<any, any>>
   schema?: S
   onSubmit: (values: z.infer<S>) => Promise<void | OnSubmitResult>
   initialValues?: UseFormProps<z.infer<S>>["defaultValues"]
+  formPadding?: boolean
 }
 
 interface OnSubmitResult {
@@ -29,6 +30,7 @@ export function Form<S extends z.ZodType<any, any>>({
   schema,
   initialValues,
   onSubmit,
+  formPadding,
   ...props
 }: FormProps<S>) {
   const ctx = useForm<z.infer<S>>({
@@ -73,9 +75,10 @@ export function Form<S extends z.ZodType<any, any>>({
         <style global jsx>{`
           .form {
             width: 100%;
-            padding: 0 10%;
+            padding: ${formPadding && "0 10%"};
             display: flex;
             flex-direction: column;
+            align-items: center;
           }
 
           .form > * + * {
@@ -84,13 +87,13 @@ export function Form<S extends z.ZodType<any, any>>({
 
           @media screen and (min-width: ${theme.breakpoints.l}) {
             .form {
-              padding: 0 20%;
+              padding: ${formPadding && "0 20%"};
             }
           }
 
           @media screen and (min-width: ${theme.breakpoints.xl}) {
             .form {
-              padding: 0 30%;
+              padding: ${formPadding && "0 30%"};
             }
           }
         `}</style>

@@ -24,7 +24,7 @@ export const LabeledTextField = forwardRef<HTMLInputElement, LabeledTextFieldPro
       : errors[name]?.message || errors[name]
 
     return (
-      <div {...outerProps}>
+      <div className="text-field" {...outerProps}>
         <label {...labelProps}>
           {label}
           <input disabled={isSubmitting} {...register(name)} {...props} />
@@ -37,16 +37,20 @@ export const LabeledTextField = forwardRef<HTMLInputElement, LabeledTextFieldPro
         )}
 
         <style jsx>{`
+          .text-field {
+            width: 100%;
+          }
+
           label {
             display: flex;
             flex-direction: column;
             align-items: start;
-            font-size: 1rem;
+            font-size: ${theme.fontSize.m};
             width: 100%;
           }
 
           input {
-            font-size: 1rem;
+            font-size: ${theme.fontSize.m};
             padding: 0.25rem 0.5rem;
             appearance: none;
             margin-top: 0.5rem;
@@ -54,6 +58,7 @@ export const LabeledTextField = forwardRef<HTMLInputElement, LabeledTextFieldPro
             border: none;
             border-bottom: 2px solid ${theme.color.red};
             width: 100%;
+            font-family: ${theme.fontFamily};
           }
 
           input::placeholder {

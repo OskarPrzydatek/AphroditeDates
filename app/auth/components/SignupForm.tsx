@@ -17,6 +17,7 @@ export const SignupForm = (props: SignupFormProps) => {
 
       <Form
         submitText="Załóż Konto"
+        formPadding={true}
         schema={Signup}
         initialValues={{ email: "", password: "" }}
         onSubmit={async (values) => {

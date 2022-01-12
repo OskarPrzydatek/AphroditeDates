@@ -14,7 +14,7 @@ const Home: BlitzPage = () => {
   return (
     <section className="home-content">
       <picture className="aphrodite">
-        <Image className="aphrodite-img" src={Aphrodite} alt="Aphrodite" />
+        <Image className="aphrodite-img" src={Aphrodite} alt="Aphrodite" width="700" height="700" />
       </picture>
       <article className="reg-log-panel">
         <h2>Afrodyta - Portal Randkowy</h2>

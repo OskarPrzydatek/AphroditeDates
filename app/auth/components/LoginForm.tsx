@@ -19,6 +19,7 @@ export const LoginForm = (props: LoginFormProps) => {
 
       <Form
         submitText="Zaloguj"
+        formPadding={true}
         schema={Login}
         initialValues={{ email: "", password: "" }}
         onSubmit={async (values) => {
