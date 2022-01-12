@@ -9,8 +9,8 @@ export const email = z
 export const password = z
   .string()
   .nonempty({ message: "Pole Wymagane" })
-  .min(10)
-  .max(100)
+  .min(8, { message: "Hasło musi zawierać conajmniej 8 znaków" })
+  .max(16, { message: "Hasło nie może zawierać więcej niż 16 znaków" })
   .transform((str) => str.trim())
 
 export const Signup = z.object({
@@ -48,7 +48,10 @@ export const Announcement = z.object({
   age: z.string().nonempty({ message: "Pole wymagane" }),
   phone: z.string().nonempty({ message: "Pole wymagane" }),
   // photo: z.string().nonempty({ message: "Pole wymagane" }),
-  description: z.string().nonempty({ message: "Pole wymagane" }),
+  description: z
+    .string()
+    .nonempty({ message: "Pole wymagane" })
+    .max(500, { message: "Opis nie może zawierać więcej niż 500 znaków." }),
   town: z.string().nonempty({ message: "Pole wymagane" }),
   gender: z.string().nonempty({ message: "Pole wymagane" }),
   interestedIn: z.string().nonempty({ message: "Pole wymagane" }),

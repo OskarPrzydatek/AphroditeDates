@@ -54,7 +54,16 @@ const AnnouncementPage: BlitzPage = () => {
           />
         </article>
       ) : (
-        <p className="user-doesnt-exist">Taki użykownik nie istnieje</p>
+        <div className="user-doesnt-exist">
+          <p>Taki użykownik nie istnieje</p>
+          <Button
+            label="Powrót"
+            removeMargin={true}
+            onClick={async () =>
+              await router.push({ pathname: "/announcements", query: backToAnnouncements })
+            }
+          />
+        </div>
       )}
       <style jsx>{`
         .announcement-wrapper {

@@ -98,7 +98,10 @@ const AnnouncementsPage: BlitzPage = () => {
               />
             </>
           ) : (
-            <h2 className="no-results">Brak Wyników</h2>
+            <>
+              <h2 className="no-results">Brak Wyników</h2>
+              <Filters />
+            </>
           )}
         </>
       ) : (

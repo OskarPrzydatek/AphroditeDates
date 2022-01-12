@@ -63,10 +63,8 @@ const UserPage: BlitzPage = () => {
                 }}
                 onSubmit={async (values) => {
                   if (userAnnouncement !== null) {
-                    console.log(values)
                     await updateAnnouncementMutation(values)
                   } else {
-                    console.log(values)
                     await addAnnouncementMutation(values)
                   }
                 }}
