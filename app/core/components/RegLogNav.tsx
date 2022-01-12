@@ -1,33 +1,46 @@
+import { theme } from "app/style/theme"
 import { Link, Routes, useRouter } from "blitz"
 import React from "react"
+import Button from "./Button"
 
 type UserPageProps = {
   currentUser: any
-  logoutMutation: any
+  logoutMutation?: any
   isUserPage?: boolean
+  isAnnouncementsPage?: boolean
 }
 
-export default function RegLogNav({ currentUser, logoutMutation, isUserPage }: UserPageProps) {
+export default function RegLogNav({
+  currentUser,
+  logoutMutation,
+  isUserPage,
+  isAnnouncementsPage,
+}: UserPageProps) {
   const router = useRouter()
 
   return (
-    <nav>
+    <nav className="nav-bar">
       {currentUser ? (
-        <div>
-          <button
+        <div className="logged-user-nav">
+          <Button
+            label={isAnnouncementsPage ? `Filtruj` : `Ogłoszenia`}
+            onClick={async () => {
+              await router.push(Routes.AnnouncementsPage())
+            }}
+          />
+          {!isUserPage && (
+            <Button label="Profil" onClick={async () => await router.push(Routes.UserPage())} />
+          )}
+          <Button
+            label="Wyloguj"
             onClick={async () => {
               await logoutMutation()
               await router.push(Routes.Home())
             }}
-          >
-            Wyloguj
-          </button>
-          {!isUserPage && (
-            <button onClick={async () => await router.push(Routes.UserPage())}>Profil</button>
-          )}
+          />
         </div>
       ) : (
-        <>
+        <div className="reg-log">
           <Link href={Routes.SignupPage()}>
             <a className="button small">
               <strong>Zarejestruj Się</strong>
@@ -38,8 +51,44 @@ export default function RegLogNav({ currentUser, logoutMutation, isUserPage }: U
               <strong>Zaloguj</strong>
             </a>
           </Link>
-        </>
+        </div>
       )}
+
+      <style jsx>{`
+        .nav-bar {
+          width: 100%;
+        }
+
+        .reg-log {
+          width: 100%;
+          display: flex;
+          justify-content: space-around;
+        }
+
+        .reg-log > a {
+          text-align: center;
+        }
+
+        .logged-user-nav {
+          display: flex;
+          justify-content: center;
+          flex-direction: column;
+        }
+
+        .logged-user-nav > * {
+          margin: 1rem;
+        }
+
+        @media screen and (min-width: ${theme.breakpoints.s}) {
+          .nav-bar {
+            font-size: ${theme.fontSize.l};
+          }
+
+          .logged-user-nav {
+            flex-direction: row;
+          }
+        }
+      `}</style>
     </nav>
   )
 }

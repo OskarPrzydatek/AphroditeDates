@@ -1,10 +1,13 @@
 import getPaginatedAnnouncements from "app/announcements/queries/getPaginatedAnnouncements"
+import logout from "app/auth/mutations/logout"
 import AnnouncementCard from "app/core/components/AnnouncementCard"
 import Filters from "app/core/components/Filters"
 import Pagination from "app/core/components/Pagination"
+import RegLogNav from "app/core/components/RegLogNav"
 import useCheckAnnouncementsRouterQuery from "app/core/hooks/useCheckAnnouncementsRouterQuery"
+import { useCurrentUser } from "app/core/hooks/useCurrentUser"
 import Layout from "app/core/layouts/Layout"
-import { BlitzPage, usePaginatedQuery, useRouter } from "blitz"
+import { BlitzPage, useMutation, usePaginatedQuery, useRouter } from "blitz"
 import React from "react"
 
 const ITEMS_PER_PAGE = 1
@@ -23,6 +26,9 @@ const AnnouncementsPage: BlitzPage = () => {
   })
 
   const checkRouter = useCheckAnnouncementsRouterQuery(router.query)
+
+  const currentUser = useCurrentUser()
+  const [logoutMutation] = useMutation(logout)
 
   const goToPreviousPage = () =>
     router.push({
@@ -51,7 +57,14 @@ const AnnouncementsPage: BlitzPage = () => {
         <>
           {announcements && announcements.length > 0 ? (
             <>
-              <h2>Ogłoszenia: {count}</h2>
+              <header>
+                <h2>Ogłoszenia: {count}</h2>
+                <RegLogNav
+                  currentUser={currentUser}
+                  logoutMutation={logoutMutation}
+                  isAnnouncementsPage={true}
+                />
+              </header>
               <ul>
                 {announcements.map(({ id, name, age, town }) => (
                   <AnnouncementCard

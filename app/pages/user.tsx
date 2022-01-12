@@ -35,7 +35,7 @@ const UserPage: BlitzPage = () => {
       {currentUser ? (
         <div>
           <div className="user-page-bar">
-            {currentUser && <span>{currentUser.email}</span>}
+            <span>{currentUser.email}</span>
             <RegLogNav
               currentUser={currentUser}
               logoutMutation={logoutMutation}
@@ -68,7 +68,6 @@ const UserPage: BlitzPage = () => {
             }}
           >
             <LabeledTextField name="name" label="Imię" placeholder="Podaj Imię" />
-            {/* <LabeledTextField name="age" label="Wiek" placeholder="Podaj Wiek" type="number" /> */}
             <LabeledSelect
               name="age"
               label="Wiek"
@@ -77,10 +76,8 @@ const UserPage: BlitzPage = () => {
             />
             <LabeledTextField name="phone" label="Nr. Telefonu" placeholder="Podaj Nr. Telefonu" />
 
-            {/* <LabeledTextField name="photo" label="Zdjęcie" placeholder="Podaj Zdjęcie" /> */}
             {/* <LabeledFile label="Zdjęcie Profilowe" setPhoto={setPhoto} /> */}
 
-            {/* <LabeledTextField name="town" label="Miasto" placeholder="Podaj Miasto" /> */}
             <LabeledSelect
               name="town"
               label="Miasto"
