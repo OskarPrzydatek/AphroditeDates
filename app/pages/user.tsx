@@ -16,7 +16,7 @@ import { InterestedIn } from "app/static/InterestedIn"
 import { Towns } from "app/static/Towns"
 import { BlitzPage, useMutation, Image } from "blitz"
 import React from "react"
-import ProfilePicture from "../../public/profile_img.webp"
+import ProfilePicture from "../../public/profile_img.jpg"
 import updateAnnouncement from "app/core/mutations/updateAnnouncement"
 import { theme } from "app/style/theme"
 

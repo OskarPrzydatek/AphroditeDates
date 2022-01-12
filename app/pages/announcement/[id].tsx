@@ -4,7 +4,7 @@ import Layout from "app/core/layouts/Layout"
 import { theme } from "app/style/theme"
 import { BlitzPage, useParams, Image, useRouter } from "blitz"
 import React from "react"
-import ProfilePicture from "../../../public/profile_img.webp"
+import ProfilePicture from "../../../public/profile_img.jpg"
 
 const AnnouncementPage: BlitzPage = () => {
   const { id } = useParams()

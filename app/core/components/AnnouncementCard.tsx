@@ -1,6 +1,6 @@
 import React from "react"
 import { Image } from "blitz"
-import ProfilePicture from "../../../public/profile_img.webp"
+import ProfilePicture from "../../../public/profile_img.jpg"
 import { theme } from "app/style/theme"
 
 export default function AnnouncementCard({ onClick, name, age }) {
