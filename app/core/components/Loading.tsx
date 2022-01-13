@@ -10,6 +10,9 @@ export default function Loading() {
         .loading {
           background: ${theme.color.white};
           color: ${theme.color.black};
+          height: 100vh;
+          marhin: 0;
+          padding: 0;
         }
 
         .loading h2 {
